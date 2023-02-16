@@ -29,7 +29,7 @@ def dummyPage(request):
 def agregarItem(request):
     return render(request, "../templates/agregar.html")
 
-def buscarItem(request):
+def buscar(request):
     return render(request, "../templates/buscar.html")
 
 
@@ -90,4 +90,15 @@ def buscarJugador(request):
     return render(request, "../templates/buscarJugador.html")
 
 def buscarEstadio(request):
-    return render(request, "../templates/buscarEstadio.html")
+   return render(request, "../templates/buscarEstadio.html")
+
+def buscarItem(request):
+    if request.GET["nombre"]:
+        nombre = request.GET["nombre"]
+        nombre_estadio = Estadio.objects.filter(nombre__icontains=nombre)
+        return render(request, "../templates/busquedaFinalizada.html", {"nombre_estadio":nombre_estadio, "nombre":nombre})
+    
+    else:
+        falla = "No se enviaron los datos correctamente"
+    
+    return HttpResponse(falla)

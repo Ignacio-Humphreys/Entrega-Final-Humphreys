@@ -1,0 +1,20 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block changed_content  %}
+
+
+    {% if nombre_estadio %}
+
+    <ul style="list-style: none;">
+        {% for estadio in nombre_estadio %}
+            <li>Nombre del Estadio: {{estadio.nombre}}</li>
+            <li>Capacidad: {{estadio.capacidad}}</li>
+            <li>Ubicación: {{estadio.ubicacion}}</li>
+        {% endfor %}
+    </ul>
+
+    {% endif %}
+
+{% endblock %}

@@ -11,7 +11,8 @@ urlpatterns = [
     path("nuevoEquipo/", views.nuevoEquipo, name="NuevoEquipo"),
     path("nuevoEstadio/", views.nuevoEstadio, name="NuevoEstadio"),
     path("nuevoJugador/", views.nuevoJugador, name="NuevoJugador"),
-    path("Buscar/", views.buscarItem, name="Buscar"),
+    path("Buscar/", views.buscar, name="Buscar"), #Página buscar
+    path("buscarItem/", views.buscarItem), #Método de búsqueda en views
     path("buscarEquipo/", views.buscarEquipo, name="BuscarEquipo"),
     path("buscarEstadio/", views.buscarEstadio, name="BuscarEstadio"),
     path("buscarJugador/", views.buscarJugador, name="BuscarJugador"),
