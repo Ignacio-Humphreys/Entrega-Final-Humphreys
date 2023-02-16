@@ -1,12 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block changed_content  %}
+
+    <p>Buscar por nombre:</p>
+    <form style="margin-left: 2%;" action="../buscarItem/" method="GET">
+        
+        <input type="text" name="nombre" id="nombre">
+        <input type="submit" value="Buscar">
+
+
+    </form>
+
+{% endblock %}

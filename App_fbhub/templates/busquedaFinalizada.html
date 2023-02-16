@@ -4,17 +4,38 @@
 
 {% block changed_content  %}
 
-
     {% if nombre_estadio %}
 
     <ul style="list-style: none;">
         {% for estadio in nombre_estadio %}
-            <li>Nombre del Estadio: {{estadio.nombre}}</li>
+            <li>Nombre del estadio: {{estadio.nombre}}</li>
             <li>Capacidad: {{estadio.capacidad}}</li>
             <li>Ubicación: {{estadio.ubicacion}}</li>
         {% endfor %}
     </ul>
 
-    {% endif %}
+    {% elif nombre_equipo %}
 
+    <ul style="list-style: none;">
+        {% for equipo in nombre_equipo %}
+            <li>Nombre del equipo: {{equipo.nombre}}</li>
+            <li>Cantidad de jugadores: {{equipo.cant_jugadores}}</li>
+            <li>Fundación: {{equipo.fundacion}}</li>
+            <li>Estadio: {{equipo.estadio}}</li>
+            <li>Colores: {{equipo.colores}}</li>
+        {% endfor %}
+    </ul>
+
+    {% elif nombre_jugador %}
+
+    <ul style="list-style: none;">
+        {% for jugador in nombre_jugador %}
+            <li>Nombre: {{jugador.nombre}}</li>
+            <li>Apellido: {{jugador.apellido}}</li>
+            <li>Pie favorito: {{jugador.pie_fav}}</li>
+            <li>Posición: {{jugador.posicion}}</li>
+        {% endfor %}
+    </ul>
+
+    {% endif %}
 {% endblock %}
