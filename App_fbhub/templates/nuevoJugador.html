@@ -1,0 +1,25 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block changed_content  %}
+
+<h1 style="text-align: center;"> Nuevo jugador </h1>
+
+    {% if crear_jugador.errors %}
+    
+    <p style="color: red">Datos incorrectos, por favor revisar.</p>
+
+    {% endif %}
+
+    <form style="display: flex; justify-content: center;" action="../nuevoJugador/" method="POST">{% csrf_token %}
+
+       <table>
+        {{crear_jugador.as_table}}
+       </table>
+
+        <input type="submit" value="Enviar">
+
+    </form>
+
+{% endblock %}

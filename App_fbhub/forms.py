@@ -14,5 +14,6 @@ class FormularioJugador(forms.Form):
     posicion = forms.CharField(max_length=20)
 
 class FormularioEstadio(forms.Form):
+    nombre = forms.CharField(max_length=40)
     capacidad = forms.IntegerField()
     ubicacion = forms.CharField(max_length=40)
