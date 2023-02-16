@@ -6,6 +6,7 @@ class Equipo(models.Model):
     cant_jugadores = models.IntegerField()
     fundacion = models.IntegerField()
     estadio = models.CharField(max_length=40)
+    colores = models.CharField(max_length=40, default="")
 
 class Jugador(models.Model):
     nombre = models.CharField(max_length=40)
