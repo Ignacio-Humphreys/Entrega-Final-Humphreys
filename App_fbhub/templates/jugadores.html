@@ -4,7 +4,11 @@
 
 {% block changed_content  %}
 
-<h1> Jugadores </h1>
-<p> Selecciona un jugador para ver sus características: </p>
+<h1 style="display: flex; justify-content: center;"> Jugadores </h1>
+<p style="margin-left: 2%;"> Selecciona un jugador para ver sus características: </p>
+
+    {% for i in jugadores %}
+        <li>{{i}}</li>
+    {% endfor %}
 
 {% endblock %}

@@ -1,0 +1,14 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block changed_content  %}
+
+<h1 style="display: flex; justify-content: center;"> Seleccione que desea buscar: </h1>
+<ul>
+    <li style="margin-left: 2%;"><a href="{% url 'BuscarEquipo' %}">Equipos</a></li>
+    <li style="margin-left: 2%;"><a href="{% url 'BuscarEstadio' %}">Estadios</a></li>
+    <li style="margin-left: 2%;"><a href="{% url 'BuscarJugador' %}">Jugadores</a></li>
+</ul>
+
+{% endblock %}

@@ -4,7 +4,11 @@
 
 {% block changed_content  %}
 
-<h1> Equipos </h1>
-<p> Selecciona un equipo para ver sus características y jugadores: </p>
+<h1 style="display: flex; justify-content: center;"> Equipos </h1>
+<p style="margin-left: 2%;"> Selecciona un equipo para ver sus características y jugadores: </p>
+
+    {% for i in equipos %}
+        <li>{{i}}</li>
+    {% endfor %}
 
 {% endblock %}

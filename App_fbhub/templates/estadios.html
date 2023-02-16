@@ -4,7 +4,11 @@
 
 {% block changed_content  %}
 
-<h1> Estadios </h1>
-<p> Selecciona un estadio para ver sus características: </p>
+<h1 style="display: flex; justify-content: center;"> Estadios </h1>
+<p style="margin-left: 2%;"> Selecciona un estadio para ver sus características: </p>
+
+    {% for i in estadios %}
+        <li>{{i}}</li>
+    {% endfor %}
 
 {% endblock %}

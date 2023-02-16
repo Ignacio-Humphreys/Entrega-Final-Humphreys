@@ -11,5 +11,9 @@ urlpatterns = [
     path("nuevoEquipo/", views.nuevoEquipo, name="NuevoEquipo"),
     path("nuevoEstadio/", views.nuevoEstadio, name="NuevoEstadio"),
     path("nuevoJugador/", views.nuevoJugador, name="NuevoJugador"),
+    path("Buscar/", views.buscarItem, name="Buscar"),
+    path("buscarEquipo/", views.buscarEquipo, name="BuscarEquipo"),
+    path("buscarEstadio/", views.buscarEstadio, name="BuscarEstadio"),
+    path("buscarJugador/", views.buscarJugador, name="BuscarJugador"),
     path("Dummy/", views.dummyPage, name="Dummy"),    
 ]

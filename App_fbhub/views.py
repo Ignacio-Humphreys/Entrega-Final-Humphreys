@@ -4,17 +4,24 @@ from App_fbhub.models import *
 from App_fbhub.forms import *
 
 # Create your views here.
+#Renderizados básicos de páginas
 def inicio(request):
     return render(request, "../templates/inicio.html")
 
 def equipos(request):
-    return render(request, "../templates/equipos.html")
+    equipos = Equipo.objects.all()
+    context = {"equipos":equipos}
+    return render(request, "../templates/equipos.html", context)
 
 def estadios(request):
-    return render(request, "../templates/estadios.html")
+    estadios = Estadio.objects.all()
+    context = {"estadios":estadios}
+    return render(request, "../templates/estadios.html", context)
 
 def jugadores(request):
-    return render(request, "../templates/jugadores.html")
+    jugadores = Jugador.objects.all()
+    context = {"jugadores":jugadores}
+    return render(request, "../templates/jugadores.html", context)
 
 def dummyPage(request):
     return render(request, "../templates/dummy.html")
@@ -22,6 +29,11 @@ def dummyPage(request):
 def agregarItem(request):
     return render(request, "../templates/agregar.html")
 
+def buscarItem(request):
+    return render(request, "../templates/buscar.html")
+
+
+#Formularios de creación de objetos
 def nuevoJugador(request):
     if request.method == "POST":
         crear_jugador = FormularioJugador(request.POST)
@@ -69,3 +81,13 @@ def nuevoEstadio(request):
         crear_estadio = FormularioEstadio()
 
     return render(request, "../templates/nuevoEstadio.html", {"crear_estadio":crear_estadio})
+
+#Búsqueda en la base de datos
+def buscarEquipo(request):
+    return render(request, "../templates/buscarEquipo.html")
+
+def buscarJugador(request):
+    return render(request, "../templates/buscarJugador.html")
+
+def buscarEstadio(request):
+    return render(request, "../templates/buscarEstadio.html")

@@ -4,11 +4,11 @@
 
 {% block changed_content  %}
 
-<h1> Seleccione que desea agregar </h1>
+<h1 style="display: flex; justify-content: center;"> Seleccione que desea agregar </h1>
 <ul>
-    <li><a href="{% url 'NuevoEquipo' %}">Equipos</a></li>
-    <li><a href="{% url 'NuevoEstadio' %}">Estadios</a></li>
-    <li><a href="{% url 'NuevoJugador' %}">Jugadores</a></li>
+    <li style="margin-left: 2%;"><a href="{% url 'NuevoEquipo' %}">Equipos</a></li>
+    <li style="margin-left: 2%;"><a href="{% url 'NuevoEstadio' %}">Estadios</a></li>
+    <li style="margin-left: 2%;"><a href="{% url 'NuevoJugador' %}">Jugadores</a></li>
 </ul>
 
 {% endblock %}
