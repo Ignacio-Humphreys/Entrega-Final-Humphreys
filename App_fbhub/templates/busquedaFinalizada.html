@@ -4,20 +4,20 @@
 
 {% block changed_content  %}
 
-    {% if nombre_estadio %}
+    {% if buscar_estadio %}
 
     <ul style="list-style: none;">
-        {% for estadio in nombre_estadio %}
+        {% for estadio in buscar_estadio %}
             <li>Nombre del estadio: {{estadio.nombre}}</li>
             <li>Capacidad: {{estadio.capacidad}}</li>
             <li>Ubicación: {{estadio.ubicacion}}</li>
         {% endfor %}
     </ul>
 
-    {% elif nombre_equipo %}
+    {% elif buscar_equipo %}
 
     <ul style="list-style: none;">
-        {% for equipo in nombre_equipo %}
+        {% for equipo in buscar_equipo %}
             <li>Nombre del equipo: {{equipo.nombre}}</li>
             <li>Cantidad de jugadores: {{equipo.cant_jugadores}}</li>
             <li>Fundación: {{equipo.fundacion}}</li>
@@ -26,10 +26,10 @@
         {% endfor %}
     </ul>
 
-    {% elif nombre_jugador %}
+    {% elif buscar_jugador %}
 
     <ul style="list-style: none;">
-        {% for jugador in nombre_jugador %}
+        {% for jugador in buscar_jugador %}
             <li>Nombre: {{jugador.nombre}}</li>
             <li>Apellido: {{jugador.apellido}}</li>
             <li>Pie favorito: {{jugador.pie_fav}}</li>

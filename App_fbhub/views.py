@@ -94,18 +94,17 @@ def buscarEstadio(request):
 
 def buscarItem(request):
     if request.GET["nombre"]:
-        nombre = request.GET["nombre"]
-        nombre_estadio = Estadio.objects.filter(nombre__icontains=nombre)
-        nombre_equipo = Equipo.objects.filter(nombre__icontains=nombre)
-        nombre_jugador = Jugador.objects.filter(nombre__icontains=nombre)
-        if nombre_estadio:
-            return render(request, "../templates/busquedaFinalizada.html", {"nombre_estadio":nombre_estadio, "nombre":nombre})
-        elif nombre_equipo:
-            return render(request, "../templates/busquedaFinalizada.html", {"nombre_equipo":nombre_equipo, "nombre":nombre})
-        elif nombre_jugador:
-            return render(request, "../templates/busquedaFinalizada.html", {"nombre_jugador":nombre_jugador, "nombre":nombre})
-
+        termino = request.GET["nombre"]
+        buscar_estadio = Estadio.objects.filter(nombre__icontains=termino)
+        buscar_equipo = Equipo.objects.filter(nombre__icontains=termino)
+        buscar_jugador = Jugador.objects.filter(nombre__icontains=termino)
+        if buscar_estadio:
+            return render(request, "../templates/busquedaFinalizada.html", {"buscar_estadio":buscar_estadio, "nombre":termino})
+        elif buscar_equipo:
+            return render(request, "../templates/busquedaFinalizada.html", {"buscar_equipo":buscar_equipo, "nombre":termino})
+        elif buscar_jugador:
+            return render(request, "../templates/busquedaFinalizada.html", {"buscar_jugador":buscar_jugador, "nombre":termino})
     else:
         falla = "No se enviaron los datos correctamente"
+        return HttpResponse(falla)
     
-    return HttpResponse(falla)
