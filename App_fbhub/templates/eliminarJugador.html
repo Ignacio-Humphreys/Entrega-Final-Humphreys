@@ -1,0 +1,16 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block changed_content %}
+
+<p>¿Estás seguro que querés eliminar al siguiente jugador?:<br> {{object}}</p>
+
+
+<form method="POST" action="">{% csrf_token %}
+
+    <button><a href="{% url 'Inicio' %}" style="color: black; text-decoration: none;">Cancelar</a></button>
+    <input type="submit" name="Confirmar">
+</form>
+
+{% endblock %}

@@ -8,7 +8,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate 
 from django.contrib.auth.decorators import login_required 
 
-# Create your views here.
+
 #Renderizados básicos de páginas
 def inicio(request):
     return render(request, "../templates/inicio.html")
@@ -38,7 +38,7 @@ def buscar(request):
     return render(request, "../templates/buscar.html")
 
 
-#Formularios de creación y edición de objetos
+#Formularios de creación, edición y remoción de objetos
 @login_required
 def nuevoJugador(request):
     if request.method == "POST":
@@ -56,6 +56,7 @@ def nuevoJugador(request):
 
     return render(request, "../templates/nuevoJugador.html", {"crear_jugador":crear_jugador})
 
+@login_required
 def editarJugador(request, pk):
     jugador = Jugador.objects.get(nombre=pk)
     form = FormularioJugador(instance=jugador)
@@ -69,6 +70,14 @@ def editarJugador(request, pk):
     context = {"form":form}
     return render(request, "../templates/nuevoJugador.html", context)
 
+@login_required
+def eliminarJugador(request, pk):
+    jugador = Jugador.objects.get(nombre=pk)
+    if request.method == "POST":
+        jugador.delete()
+        return redirect("../Jugadores")
+    context = {"object":jugador}
+    return render(request, "../templates/eliminarJugador.html", context)
 
 @login_required
 def nuevoEquipo(request):
@@ -87,6 +96,7 @@ def nuevoEquipo(request):
 
     return render(request, "../templates/nuevoEquipo.html", {"crear_equipo":crear_equipo})
 
+@login_required
 def editarEquipo(request, pk):
     equipo = Equipo.objects.get(nombre=pk)
     form = FormularioEquipos(instance=equipo)
@@ -99,6 +109,15 @@ def editarEquipo(request, pk):
     
     context = {"form":form}
     return render(request, "../templates/nuevoEquipo.html", context)
+
+@login_required
+def eliminarEquipo(request, pk):
+    equipo = Equipo.objects.get(nombre=pk)
+    if request.method == "POST":
+        equipo.delete()
+        return redirect("../Equipos")
+    context = {"object":equipo}
+    return render(request, "../templates/eliminarEquipo.html", context)
 
 @login_required
 def nuevoEstadio(request):
@@ -117,6 +136,7 @@ def nuevoEstadio(request):
 
     return render(request, "../templates/nuevoEstadio.html", {"crear_estadio":crear_estadio})
 
+@login_required
 def editarEstadio(request, pk):
     estadio = Estadio.objects.get(nombre=pk)
     form = FormularioEstadio(instance=estadio)
@@ -129,6 +149,15 @@ def editarEstadio(request, pk):
     
     context = {"form":form}
     return render(request, "../templates/nuevoEstadio.html", context)
+
+@login_required
+def eliminarEstadio(request, pk):
+    estadio = Estadio.objects.get(nombre=pk)
+    if request.method == "POST":
+        estadio.delete()
+        return redirect("../Estadios")
+    context = {"object":estadio}
+    return render(request, "../templates/eliminarEstadio.html", context)
 
 #Búsqueda en la base de datos
 def buscarEquipo(request):
