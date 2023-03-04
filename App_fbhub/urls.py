@@ -1,5 +1,6 @@
-from django.urls import path
+from django.urls import path, re_path
 from App_fbhub import views
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     
@@ -16,5 +17,8 @@ urlpatterns = [
     path("buscarEquipo/", views.buscarEquipo, name="BuscarEquipo"),
     path("buscarEstadio/", views.buscarEstadio, name="BuscarEstadio"),
     path("buscarJugador/", views.buscarJugador, name="BuscarJugador"),
-    path("Dummy/", views.dummyPage, name="Dummy"),    
+    path("Dummy/", views.dummyPage, name="Dummy"),
+    path("login", views.user_login, name="Login"),
+    path("registro", views.sign_up, name="Register"),
+    path("logout", LogoutView.as_view(template_name="logout.html"), name="Logout"),
 ]

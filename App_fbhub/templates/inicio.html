@@ -5,6 +5,18 @@
 {% block changed_content  %}
 
 <h1 style="display: flex; justify-content: center;"> Vista Inicial </h1>
-<p style="margin-left: 2%;"> Vista heredada del template padre </p>
+
+<!--{% if check_page == True %}
+<h2 style="display: flex; justify-content: center;">Bienvenido por primera vez {{user.username}} a Football Hub!</h2>
+{% endif %}-->
+
+{% if not request.user.is_authenticated %}
+<p style="display: flex; justify-content: center;"> Para utilizar todas las funcionalidades del sitio, por favor crea una cuenta o inicia sesión desde el menú de opciones</p>
+
+{% elif request.user.is_authenticated %}
+<p style="display: flex; justify-content: center;"> ¿Sabías que al ser usuario registrado puedes agregar nuevos equipos, estadios o jugadores a nuestra base de dato desde las opciones de arriba a la derecha?</p>
+
+{% endif %}
+
 
 {% endblock %}

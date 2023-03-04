@@ -1,0 +1,15 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block changed_content  %}
+<h1 style="display: flex; justify-content: center;">Crear nuevo usuario</h1>
+<form action="" method="post" style="margin-left: 2%; list-style: none;">
+
+    {% csrf_token %}
+    {{signForm.as_p}}
+    <button type="submit">Crear usuario</button>
+    
+</form>
+
+{% endblock %}

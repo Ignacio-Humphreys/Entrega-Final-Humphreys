@@ -9,6 +9,8 @@
 
     {% for i in jugadores %}
         <li>{{i}}</li>
+        <button><a href="{% url 'EditarJugador' i.nombre %}"></a>Editar</button>
+        <button><a href="{% url 'Eliminar' i.nombre %}"></a>Eliminar</button>
     {% endfor %}
 
 {% endblock %}
