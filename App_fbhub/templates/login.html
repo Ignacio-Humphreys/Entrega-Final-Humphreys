@@ -4,12 +4,22 @@
 
 {% block changed_content  %}
 <h1 style="display: flex; justify-content: center;">Iniciar Sesión</h1>
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+  </ul>
+{% endif %}
+
 <form action="" method="post" style="margin-left: 2%; list-style: none;">
 
     {% csrf_token %}
     {{log.as_p}}
     <button type="submit">Iniciar Sesión</button>
     
+
 </form>
 
 {% endblock %}

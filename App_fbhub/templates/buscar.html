@@ -5,10 +5,10 @@
 {% block changed_content  %}
 
 <h1 style="display: flex; justify-content: center;"> Seleccione que desea buscar: </h1>
-<ul>
-    <li style="margin-left: 2%;"><a href="{% url 'BuscarEquipo' %}">Equipos</a></li>
-    <li style="margin-left: 2%;"><a href="{% url 'BuscarEstadio' %}">Estadios</a></li>
-    <li style="margin-left: 2%;"><a href="{% url 'BuscarJugador' %}">Jugadores</a></li>
+<ul style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+    <li style="list-style: none; padding-bottom: 0.5rem; padding-top: 0.5rem;"><button  style="position: relative; top: 15px; left: 0; right: 0; bottom: 0; margin: auto; border: none; padding: 15px; border-radius: 15px; box-shadow: 0 0 8px #d9d4e7; width: 200px; height: 65px; background-color: #d9d4e7;"><a href="{% url 'BuscarEquipo' %}" style="text-decoration: none;color: black;display: inline-block;height: 100%;width: 100%;margin-top: 3%;">Equipos</a></button></li>
+    <li style="list-style: none; padding-bottom: 0.5rem; padding-top: 0.5rem;"><button style="position: relative; top: 15px; left: 0; right: 0; bottom: 0; margin: auto; border: none; padding: 15px; border-radius: 15px; box-shadow: 0 0 8px #d9d4e7; width: 200px; height: 65px; background-color: #d9d4e7;"><a href="{% url 'BuscarEstadio' %}" style="text-decoration: none;color: black;display: inline-block;height: 100%;width: 100%;margin-top: 3%;">Estadios</a></button></li>
+    <li style="list-style: none; padding-bottom: 0.5rem; padding-top: 0.5rem;"><button style="position: relative; top: 15px; left: 0; right: 0; bottom: 0; margin: auto; border: none; padding: 15px; border-radius: 15px; box-shadow: 0 0 8px #d9d4e7; width: 200px; height: 65px; background-color: #d9d4e7;"><a href="{% url 'BuscarJugador' %}" style="text-decoration: none;color: black;display: inline-block;height: 100%;width: 100%;margin-top: 3%;">Jugadores</a></button></li>
 </ul>
 
 {% endblock %}

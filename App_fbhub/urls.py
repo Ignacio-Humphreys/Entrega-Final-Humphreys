@@ -8,6 +8,7 @@ urlpatterns = [
     path("Equipos/", views.equipos, name="Equipos"),
     path("Estadios/", views.estadios, name="Estadios"),
     path("Jugadores/", views.jugadores, name="Jugadores"),
+    path("sobre_mi", views.about, name="About"),
     path("Agregar/", views.agregarItem, name="Agregar"),
     path("nuevoEquipo/", views.nuevoEquipo, name="NuevoEquipo"),
     path("nuevoEstadio/", views.nuevoEstadio, name="NuevoEstadio"),

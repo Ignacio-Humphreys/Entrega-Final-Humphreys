@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from App_fbhub.models import *
 from App_fbhub.forms import *
+from django.contrib import messages
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.forms import AuthenticationForm
@@ -27,6 +28,9 @@ def jugadores(request):
     jugadores = Jugador.objects.all()
     context = {"jugadores":jugadores}
     return render(request, "../templates/jugadores.html", context)
+
+def about(request):
+    return render(request, "../templates/sobre_mi.html")
 
 def dummyPage(request):
     return render(request, "../templates/dummy.html")
@@ -201,8 +205,8 @@ def user_login(request):
             if user is not None:
                 login(request, user)
                 return render(request, "../templates/inicio.html")
-            else:
-                return render(request, "../templates/login.html", {"Mensaje": f"Usuario o contraseña incorrectos. Por favor revisar e intentar nuevamente"})
+        else:
+            messages.error(request, 'Usuario o contraseña errónea')
             
     log = AuthenticationForm()
     return render(request, "../templates/login.html", {"log":log})
@@ -210,15 +214,29 @@ def user_login(request):
 def sign_up(request):
     if request.user.is_authenticated == True:
         return redirect("Inicio")
+    
     elif request.method == "POST":
         signForm = UserRegisterForm(request.POST)
+        username = request.POST.get('username')
+        email = request.POST.get('email')
 
-        if signForm.is_valid():
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'El nombre de usuario ya existe, por favor elija otro')
+
+        elif User.objects.filter(email=email).exists():
+            messages.error(request, 'Email ya utilizado en otra cuenta, por favor seleccione uno distinto')
+
+        elif signForm.is_valid():
             signForm.cleaned_data["username"]
             signForm.save()
             return redirect("Login")
+        
     else:
         signForm = UserRegisterForm()
 
     return render(request, "../templates/registro.html", {"signForm":signForm})
 
+"""@login_required
+def user_update(request, pk):
+    if request.method =="POST":
+"""

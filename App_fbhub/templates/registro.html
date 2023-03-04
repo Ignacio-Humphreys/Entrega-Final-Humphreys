@@ -4,6 +4,15 @@
 
 {% block changed_content  %}
 <h1 style="display: flex; justify-content: center;">Crear nuevo usuario</h1>
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+  </ul>
+{% endif %}
+
 <form action="" method="post" style="margin-left: 2%; list-style: none;">
 
     {% csrf_token %}
