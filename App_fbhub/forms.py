@@ -1,25 +1,23 @@
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Equipo, Estadio, Jugador
 
-class FormularioEquipos(forms.Form):
-    nombre = forms.CharField(max_length=40)
-    cant_jugadores = forms.IntegerField()
-    fundacion = forms.IntegerField()
-    estadio = forms.CharField(max_length=40)
-    colores = forms.CharField(max_length=40)
+class FormularioEquipos(ModelForm):
+    class Meta:
+        model = Equipo
+        fields = "__all__"
+        
+class FormularioJugador(ModelForm):
+    class Meta:
+        model = Jugador
+        fields = "__all__"
 
-class FormularioJugador(forms.Form):
-    nombre = forms.CharField(max_length=40)
-    apellido = forms.CharField(max_length=40)
-    pie_fav = forms.CharField(max_length=1)
-    posicion = forms.CharField(max_length=20)
-
-class FormularioEstadio(forms.Form):
-    nombre = forms.CharField(max_length=40)
-    capacidad = forms.IntegerField()
-    ubicacion = forms.CharField(max_length=40)
+class FormularioEstadio(ModelForm):
+    class Meta:
+        model = Estadio
+        fields = "__all__"
 
 class UserRegisterForm(UserCreationForm):
     first_name = forms.CharField(label="Nombre")

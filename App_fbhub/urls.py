@@ -12,6 +12,9 @@ urlpatterns = [
     path("nuevoEquipo/", views.nuevoEquipo, name="NuevoEquipo"),
     path("nuevoEstadio/", views.nuevoEstadio, name="NuevoEstadio"),
     path("nuevoJugador/", views.nuevoJugador, name="NuevoJugador"),
+    path("editarJugador/<str:pk>", views.editarJugador, name="EditarJugador"),
+    path("editarEstadio/<str:pk>", views.editarEstadio, name="EditarEstadio"),
+    path("editarEquipo/<str:pk>", views.editarEquipo, name="EditarEquipo"),
     path("Buscar/", views.buscar, name="Buscar"), #Página buscar
     path("buscarItem/", views.buscarItem), #Método de búsqueda en views
     path("buscarEquipo/", views.buscarEquipo, name="BuscarEquipo"),

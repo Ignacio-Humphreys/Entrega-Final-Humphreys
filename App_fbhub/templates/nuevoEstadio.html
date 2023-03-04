@@ -4,7 +4,11 @@
 
 {% block changed_content  %}
 
-<h1 style="text-align: center;"> Nuevo estadio </h1>
+{% if crear_estadio %}
+    <h1 style="text-align: center;"> Nuevo estadio </h1>
+{% elif form %}
+    <h1 style="text-align: center;"> Editar estadio </h1>
+{% endif %}
 
     {% if crear_estadio.errors %}
     
@@ -12,10 +16,19 @@
 
     {% endif %}
 
+    {% if crear_estadio %}
     <form style="display: flex; justify-content: center;" action="../nuevoEstadio/" method="POST">{% csrf_token %}
-
+    {% elif form %}
+    <form style="display: flex; justify-content: center;" action="" method="POST">{% csrf_token %}
+    {% endif %}
+    
        <table>
-        {{crear_estadio.as_table}}
+        {% if crear_estadio %}
+            {{crear_estadio.as_table}}
+        {% elif form %}
+            {{form.as_table}}
+        {% endif %}
+
        </table>
 
         <input type="submit" value="Enviar">

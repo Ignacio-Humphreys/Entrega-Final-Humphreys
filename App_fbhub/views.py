@@ -38,7 +38,7 @@ def buscar(request):
     return render(request, "../templates/buscar.html")
 
 
-#Formularios de creación de objetos
+#Formularios de creación y edición de objetos
 @login_required
 def nuevoJugador(request):
     if request.method == "POST":
@@ -55,6 +55,20 @@ def nuevoJugador(request):
         crear_jugador = FormularioJugador()
 
     return render(request, "../templates/nuevoJugador.html", {"crear_jugador":crear_jugador})
+
+def editarJugador(request, pk):
+    jugador = Jugador.objects.get(nombre=pk)
+    form = FormularioJugador(instance=jugador)
+
+    if request.method == "POST":
+        form = FormularioJugador(request.POST, instance=jugador)
+        if form.is_valid():
+            form.save()
+            return redirect("../Jugadores")
+    
+    context = {"form":form}
+    return render(request, "../templates/nuevoJugador.html", context)
+
 
 @login_required
 def nuevoEquipo(request):
@@ -73,6 +87,19 @@ def nuevoEquipo(request):
 
     return render(request, "../templates/nuevoEquipo.html", {"crear_equipo":crear_equipo})
 
+def editarEquipo(request, pk):
+    equipo = Equipo.objects.get(nombre=pk)
+    form = FormularioEquipos(instance=equipo)
+
+    if request.method == "POST":
+        form = FormularioEquipos(request.POST, instance=equipo)
+        if form.is_valid():
+            form.save()
+            return redirect("../Equipos")
+    
+    context = {"form":form}
+    return render(request, "../templates/nuevoEquipo.html", context)
+
 @login_required
 def nuevoEstadio(request):
     if request.method == "POST":
@@ -89,6 +116,19 @@ def nuevoEstadio(request):
         crear_estadio = FormularioEstadio()
 
     return render(request, "../templates/nuevoEstadio.html", {"crear_estadio":crear_estadio})
+
+def editarEstadio(request, pk):
+    estadio = Estadio.objects.get(nombre=pk)
+    form = FormularioEstadio(instance=estadio)
+
+    if request.method == "POST":
+        form = FormularioEstadio(request.POST, instance=estadio)
+        if form.is_valid():
+            form.save()
+            return redirect("../Estadios")
+    
+    context = {"form":form}
+    return render(request, "../templates/nuevoEstadio.html", context)
 
 #Búsqueda en la base de datos
 def buscarEquipo(request):
@@ -153,27 +193,3 @@ def sign_up(request):
 
     return render(request, "../templates/registro.html", {"signForm":signForm})
 
-"""def check_page(request):
-    url_anterior = request.META.get('HTTP_REFERER')
-    if url_anterior == "Register":
-        return True"""
-
-#CRUD
-"""class EditarEquipo(UpdateView):
-    model = Equipo
-    success_url = "Equipos"
-    fields = ["nombre", "cant_jugadores", "fundacion", "estadio", "colores"]
-
-class EditarEstadio(UpdateView):
-    model = Estadio
-    success_url = "Estadios"
-    fields = ["nombre", "capacidad", "ubicacion"]
-
-class EditarJugador(UpdateView):
-    model = Jugador
-    success_url = "Jugadores"
-    fields = ["nombre", "apellido", "pie_fav", "posicion"]
-
-class EliminarEquipo(DeleteView):
-    model = Equipo
-    success_url = "Equipos"""
