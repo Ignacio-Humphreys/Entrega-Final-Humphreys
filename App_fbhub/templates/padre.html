@@ -36,6 +36,9 @@
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                                 <li class="nav-item active"><a class="nav-link" href="{% url 'Buscar' %}">Buscar</a></li>
                                 <li class="nav-item"><a class="nav-link" href="https://github.com/Ignacio-Humphreys/Tercera-Pre-Entrega-Humphreys" target="_blank">Repositorio</a></li>
+                                {% if request.user.is_authenticated %}
+                                <li><img src="{{url}}" style="max-height: 40px; max-width: 40px;"></li>
+                                {% endif %}
                                 <li class="nav-item dropdown">
                                     {% if not request.user.is_authenticated %}
                                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ingresar</a>
@@ -46,6 +49,8 @@
                                         {% if request.user.is_authenticated %}
                                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bienvenido {{user.username}}</a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{% url 'Avatar' %}">Editar avatar</a>
+                                        <a class="dropdown-item" href="{% url 'Update' %}">Editar perfil</a>
                                         <a class="dropdown-item" href="{% url 'Logout' %}">Logout</a>
                                         {% endif %}
                                         <div class="dropdown-divider"></div>

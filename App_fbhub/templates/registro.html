@@ -3,7 +3,12 @@
 {% load static %}
 
 {% block changed_content  %}
+
+{% if signForm %}
 <h1 style="display: flex; justify-content: center;">Crear nuevo usuario</h1>
+{% elif form %}
+<h1 style="display: flex; justify-content: center;">Editar usuario</h1>
+{% endif %}
 
 {% if messages %}
   <ul class="messages">
@@ -13,12 +18,28 @@
   </ul>
 {% endif %}
 
-<form action="" method="post" style="margin-left: 2%; list-style: none;">
+{% if signForm %}
+<form action="" method="post" style="margin-left: 2%; list-style: none;" enctype="multipart/form-data">
 
     {% csrf_token %}
     {{signForm.as_p}}
+    
     <button type="submit">Crear usuario</button>
     
 </form>
+
+{% elif form %}
+<form action="" method="post" style="margin-left: 2%; list-style: none;" enctype="multipart/form-data">
+
+  {% csrf_token %}
+  {{form.as_p}}
+  
+  <button type="submit">Enviar</button>
+  
+</form>
+
+{% endif %}
+
+<p>¿Ya tienes una cuenta? Inicia sesión ingresando <a href="{% url 'Login' %}">aqui</a></p>
 
 {% endblock %}

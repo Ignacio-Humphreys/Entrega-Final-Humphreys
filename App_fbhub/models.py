@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Equipo(models.Model):
@@ -7,6 +8,7 @@ class Equipo(models.Model):
     fundacion = models.IntegerField()
     estadio = models.CharField(max_length=40)
     colores = models.CharField(max_length=40, default="")
+    escudo = models.ImageField(upload_to="media/", default="media/No-Image-Placeholder.jpg")
     def __str__(self):
         return f"Nombre: {self.nombre} - Jugadores: {self.cant_jugadores} - Fundación: {self.fundacion} - Estadio: {self.estadio} - Colores: {self.colores}"
 
@@ -15,6 +17,7 @@ class Jugador(models.Model):
     apellido = models.CharField(max_length=40)
     pie_fav = models.CharField(max_length=1)
     posicion = models.CharField(max_length=20)
+    imagen = models.ImageField(upload_to="media/", default="media/No-Image-Placeholder.jpg")
     def __str__(self):
         return f"Nombre: {self.nombre} - Apellido: {self.apellido} - Pie favorito: {self.pie_fav} - Posición: {self.posicion}"
 
@@ -22,5 +25,12 @@ class Estadio(models.Model):
     nombre = models.CharField(max_length=40, default="")
     capacidad = models.IntegerField()
     ubicacion = models.CharField(max_length=40)
+    imagen = models.ImageField(upload_to="media/", default="media/No-Image-Placeholder.jpg")
     def __str__(self):
         return f"Nombre: {self.nombre} - Capacidad: {self.capacidad} - Ubicación: {self.ubicacion}"
+    
+class Avatar(models.Model):
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE) #Vinculo con el usuario
+    imagen = models.ImageField(upload_to="avatares/", null=True, blank=True)
+    def __str__(self):
+        return f"{self.user} - {self.imagen}"

@@ -13,5 +13,4 @@
 - Mejoras del HTML y CSS
 
 #Detalles adicionales:
-- Sign IN y Log ON todavía no están funcionales (actualización del proyecto final).
 - Con la opción "Repositorio" se tendrá fácil acceso al repositorio del proyecto.

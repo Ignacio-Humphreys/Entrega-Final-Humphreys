@@ -27,5 +27,7 @@ urlpatterns = [
     path("Dummy/", views.dummyPage, name="Dummy"),
     path("login", views.user_login, name="Login"),
     path("registro", views.sign_up, name="Register"),
+    path("editar", views.user_update, name="Update"),
+    path("avatar", views.agregarAvatar, name="Avatar"),
     path("logout", LogoutView.as_view(template_name="logout.html"), name="Logout"),
 ]
