@@ -132,6 +132,27 @@ h1, .h1 {
   height: 300px;
 }
 
+.formularios{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.boton_regular{
+  position: relative;
+  top: 15px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: none;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 0 8px #d9d4e7;
+  height: 55px;
+  background-color: #d9d4e7
+}
+
 @media (min-width: 1200px) {
   h1, .h1 {
     font-size: 2.5rem;

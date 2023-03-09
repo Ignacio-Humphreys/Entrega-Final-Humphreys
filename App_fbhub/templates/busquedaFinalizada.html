@@ -14,8 +14,8 @@
             <li>Capacidad: {{estadio.capacidad}}</li>
             <li>Ubicación: {{estadio.ubicacion}}</li>
             <li>Equipo: <a href="../buscarItem/?nombre={{estadio.equipo}}">{{estadio.equipo}}</a></li>
-            <button><a href="{% url 'EditarEstadio' estadio.nombre %}" style="color: black; text-decoration: none;">Editar</a></button>
-            <button><a href="{% url 'EliminarEstadio' estadio.nombre %}" style="color: black; text-decoration: none;">Eliminar</a></button>
+            <button class="boton_regular"><a href="{% url 'EditarEstadio' estadio.nombre %}" style="color: black; text-decoration: none;">Editar</a></button>
+            <button class="boton_regular"><a href="{% url 'EliminarEstadio' estadio.nombre %}" style="color: black; text-decoration: none;">Eliminar</a></button>
         </div><br><br>
         {% endfor %}
     </ul>
@@ -31,8 +31,8 @@
             <li>Fundación: {{equipo.fundacion}}</li>
             <li>Estadio: <a href="../buscarItem/?nombre={{equipo.estadio}}">{{equipo.estadio}}</a></li>
             <li>Colores: {{equipo.colores}}</li>
-            <button><a href="{% url 'EditarEquipo' equipo.nombre %}" style="color: black; text-decoration: none;">Editar</a></button>
-            <button><a href="{% url 'EliminarEquipo' equipo.nombre %}" style="color: black; text-decoration: none;">Eliminar</a></button>
+            <button class="boton_regular"><a href="{% url 'EditarEquipo' equipo.nombre %}" style="color: black; text-decoration: none;">Editar</a></button>
+            <button class="boton_regular"><a href="{% url 'EliminarEquipo' equipo.nombre %}" style="color: black; text-decoration: none;">Eliminar</a></button>
         </div> <br><br>
         {% endfor %}
     </ul>
@@ -48,8 +48,8 @@
             <li>Pie favorito: {{jugador.pie_fav}}</li>
             <li>Posición: {{jugador.posicion}}</li>
             <li>Equipo actual: <a href="../buscarItem/?nombre={{jugador.equipo_act}}">{{jugador.equipo_act}}</a></li>
-            <button><a href="{% url 'EditarJugador' jugador.nombre %}" style="color: black; text-decoration: none;">Editar</a></button>
-            <button><a href="{% url 'EliminarJugador' jugador.nombre %}" style="color: black; text-decoration: none;">Eliminar</a></button>
+            <button class="boton_regular"><a href="{% url 'EditarJugador' jugador.nombre %}" style="color: black; text-decoration: none;">Editar</a></button>
+            <button class="boton_regular"><a href="{% url 'EliminarJugador' jugador.nombre %}" style="color: black; text-decoration: none;">Eliminar</a></button>
         </div><br><br>
         {% endfor %}
     </ul>

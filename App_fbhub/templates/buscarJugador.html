@@ -4,11 +4,11 @@
 
 {% block changed_content  %}
 
-    <h1>Buscador de jugadores</h1>
-    <p>Buscar por nombre:</p>
-    <form style="margin-left: 2%;" action="../buscarItem/" method="GET">
-        
-        <input type="text" name="nombre" id="nombre">
+    <h1 style="display: flex; justify-content: center;">Buscador de jugadores</h1>
+    
+    <form class="formularios" action="../buscarItem/" method="GET">
+        <p>Buscar por nombre:</p>   
+        <input type="text" name="nombre" id="nombre"><br>
         <input type="submit" value="Buscar">
 
 

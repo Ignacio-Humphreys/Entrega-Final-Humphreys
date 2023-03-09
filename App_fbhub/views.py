@@ -3,8 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from App_fbhub.models import *
 from App_fbhub.forms import *
 from django.contrib import messages
-from django.views.generic.edit import UpdateView
-from django.views.generic.edit import DeleteView
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate 
 from django.contrib.auth.decorators import login_required 
@@ -308,8 +307,8 @@ def user_update(request):
           usuario.first_name = datos["first_name"]
           usuario.last_name = datos["last_name"]
           usuario.email = datos["email"]
-          usuario.password1 = datos["password1"]
-          usuario.password2 = datos["password2"]
+          nuevo_pass = make_password(datos["password1"])
+          usuario.password = nuevo_pass
           usuario.save()
           return redirect("Inicio")
     

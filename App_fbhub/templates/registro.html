@@ -19,26 +19,26 @@
 {% endif %}
 
 {% if signForm %}
-<form action="" method="post" style="margin-left: 2%; list-style: none;" enctype="multipart/form-data">
+<form action="" method="post" class="formularios" enctype="multipart/form-data">
 
     {% csrf_token %}
-    {{signForm.as_p}}
+    {{signForm.as_table}} <br>
     
-    <button type="submit">Crear usuario</button>
+    <button type="submit" class="boton_regular">Crear usuario</button>
     
 </form>
 <p>¿Ya tienes una cuenta? Inicia sesión ingresando <a href="{% url 'Login' %}">aqui</a></p>
 
 {% elif form %}
-<form action="" method="post" style="margin-left: 2%; list-style: none;" enctype="multipart/form-data">
+<form action="" method="post" class="formularios" enctype="multipart/form-data">
 
   {% csrf_token %}
-  {{form.as_p}}
+  {{form.as_table}} <br>
   
-  <button type="submit">Enviar</button>
+  <button type="submit" class="boton_regular">Enviar</button>
   
-</form>
-
+</form> <br>
+<p style="display: flex; justify-content: center;">Tené en cuenta que al cambiar la contraseña, se te deslogueará por motivos de seguridad. Por favor, asegurate de loguearte nuevamente</p>
 {% endif %}
 
 

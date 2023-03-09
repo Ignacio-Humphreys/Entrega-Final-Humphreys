@@ -3,12 +3,14 @@
 {% load static %}
 
 {% block changed_content  %}
-<h1>Actualizar Avatar</h1>
+<h1 style="display: flex; justify-content: center;">Actualizar Avatar</h1>
 
-<form method="post" style="margin-left: 2%; list-style: none;" enctype="multipart/form-data">
+<form method="post" class="formularios" enctype="multipart/form-data">
     {% csrf_token %}
-    {{avatarForm.as_p}}
-    <button type="submit">Subir imagen</button>
+    <p style="display: flex; justify-content: center;">Imagen actual:</p>
+    <img src="{{url}}" style="width: 150px; height: 150px;">
+    {{avatarForm.as_table}} <br><br>
+    <button type="submit" class="boton_regular">Subir imagen</button>
   </form>
   
 

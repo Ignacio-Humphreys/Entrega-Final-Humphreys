@@ -6,10 +6,6 @@
 
 <h1 style="display: flex; justify-content: center;"> Vista Inicial </h1>
 
-<!--{% if check_page == True %}
-<h2 style="display: flex; justify-content: center;">Bienvenido por primera vez {{user.username}} a Football Hub!</h2>
-{% endif %}-->
-
 {% if not request.user.is_authenticated %}
 <p style="display: flex; justify-content: center;"> Para utilizar todas las funcionalidades del sitio, por favor crea una cuenta o inicia sesión desde el menú de opciones</p>
 

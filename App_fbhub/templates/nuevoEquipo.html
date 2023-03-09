@@ -5,9 +5,9 @@
 {% block changed_content  %}
 
 {% if crear_equipo %}
-    <h1 style="text-align: center;"> Nuevo equipo </h1>
+    <h1 style="display: flex; justify-content: center;"> Nuevo equipo </h1>
 {% elif form %}
-    <h1 style="text-align: center;"> Editar equipo </h1>
+    <h1 style="display: flex; justify-content: center;"> Editar equipo </h1>
 {% endif %}
 
     {% if crear_equipo.errors %}
@@ -29,7 +29,7 @@
             {{form.as_table}}         
         {% endif %}
 
-       </table>
+       </table><br>
 
         <input type="submit" value="Enviar">
 

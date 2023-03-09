@@ -13,11 +13,11 @@
   </ul>
 {% endif %}
 
-<form action="" method="post" style="margin-left: 2%; list-style: none;">
+<form action="" method="post" class="formularios">
 
     {% csrf_token %}
-    {{log.as_p}}
-    <button type="submit">Iniciar Sesión</button>
+    {{log.as_table}}
+    <button type="submit" class="boton_regular">Iniciar Sesión</button>
     
 
 </form>
