@@ -7,10 +7,17 @@
 <h1 style="display: flex; justify-content: center;"> Estadios </h1>
 <p style="margin-left: 2%;"> Selecciona un estadio para ver sus características: </p>
 
+<div class="estadios">
     {% for i in estadios %}
-        <li>{{i}}</li>
+    <div class="estadios_ind">
+        <img src="{{i.imagen.url}}" alt="Escudo {{i.nombre}}" onerror="this.onerror=null;this.src='/media/No-Image-Placeholder.jpg';">
+        <li>Nombre: {{i.nombre}}</li>
+        <li>Capacidad: {{i.capacidad}}</li>
+        <li>Ubicación: {{i.ubicacion}}</li>
+        <li>Equipo: {{i.equipo}}</li>
         <button><a href="{% url 'EditarEstadio' i.nombre %}" style="color: black; text-decoration: none;">Editar</a></button>
         <button><a href="{% url 'EliminarEstadio' i.nombre %}" style="color: black; text-decoration: none;">Eliminar</a></button>
+    </div>
     {% endfor %}
-
+</div>
 {% endblock %}

@@ -7,10 +7,18 @@
 <h1 style="display: flex; justify-content: center;"> Equipos </h1>
 <p style="margin-left: 2%;"> Selecciona un equipo para ver sus características y jugadores: </p>
 
+<div class="equipos">
     {% for i in equipos %}
-        <li>{{i}}</li>
+    <div class="equipos_ind">
+        <img src="{{i.escudo.url}}" alt="Escudo {{i.nombre}}" onerror="this.onerror=null;this.src='/media/No-Image-Placeholder.jpg';">
+        <li>Nombre: {{i.nombre}}</li>
+        <li>Cantidad de jugadores: {{i.cant_jugadores}}</li>
+        <li>Fundación: {{i.fundacion}}</li>
+        <li>Estadio: {{i.estadio}}</li>
+        <li>Colores: {{i.colores}}</li>
         <button><a href="{% url 'EditarEquipo' i.nombre %}" style="color: black; text-decoration: none;">Editar</a></button>
         <button><a href="{% url 'EliminarEquipo' i.nombre %}" style="color: black; text-decoration: none;">Eliminar</a></button>
+    </div>
     {% endfor %}
-
+</div>
 {% endblock %}

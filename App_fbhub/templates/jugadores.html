@@ -7,10 +7,19 @@
 <h1 style="display: flex; justify-content: center;"> Jugadores </h1>
 <p style="margin-left: 2%;"> Selecciona un jugador para ver sus características: </p>
 
+
+<div class="jugadores">
     {% for i in jugadores %}
-        <li>{{i}}</li>
+    <div class="jugadores_ind">
+        <img src="{{i.imagen.url}}" alt="Escudo {{i.nombre}}" onerror="this.onerror=null;this.src='/media/No-Image-Placeholder.jpg';">
+        <li>Nombre: {{i.nombre}}</li>
+        <li>Apellido: {{i.apellido}}</li>
+        <li>Pie hábil: {{i.pie_fav}}</li>
+        <li>Posición: {{i.posicion}}</li>
+        <li>Equipo actual: {{i.equipo_act}}</li>
         <button><a href="{% url 'EditarJugador' i.nombre %}" style="color: black; text-decoration: none;">Editar</a></button>
         <button><a href="{% url 'EliminarJugador' i.nombre %}" style="color: black; text-decoration: none;">Eliminar</a></button>
+    </div>
     {% endfor %}
-
+</div>
 {% endblock %}

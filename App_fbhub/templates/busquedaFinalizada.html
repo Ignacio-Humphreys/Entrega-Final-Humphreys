@@ -5,12 +5,15 @@
 {% block changed_content  %}
 
     {% if buscar_estadio %}
-    <h1>Estadio/s encontrado/s</h1>
+    <h1 style="display: flex; justify-content: center;">Estadio/s encontrado/s</h1>
     <ul style="list-style: none;">
         {% for estadio in buscar_estadio %}
+            <img src="{{estadio.imagen.url}}" alt="{{estadio.nombre}}" onerror="this.onerror=null;this.src='/media/No-Image-Placeholder.jpg';">
             <li>Nombre del estadio: {{estadio.nombre}}</li>
             <li>Capacidad: {{estadio.capacidad}}</li>
-            <li>Ubicación: {{estadio.ubicacion}}</li> <br><br>
+            <li>Ubicación: {{estadio.ubicacion}}</li> 
+            <button><a href="{% url 'EditarEstadio' estadio.nombre %}" style="color: black; text-decoration: none;">Editar</a></button>
+            <button><a href="{% url 'EliminarEstadio' estadio.nombre %}" style="color: black; text-decoration: none;">Eliminar</a></button><br><br>
         {% endfor %}
     </ul>
 
@@ -18,11 +21,14 @@
     <h1>Equipo/s encontrado/s</h1>
     <ul style="list-style: none;">
         {% for equipo in buscar_equipo %}
+            <img src="{{equipo.escudo.url}}" alt="Escudo {{equipo.nombre}}" onerror="this.onerror=null;this.src='/media/No-Image-Placeholder.jpg';">
             <li>Nombre del equipo: {{equipo.nombre}}</li>
             <li>Cantidad de jugadores: {{equipo.cant_jugadores}}</li>
             <li>Fundación: {{equipo.fundacion}}</li>
             <li>Estadio: {{equipo.estadio}}</li>
-            <li>Colores: {{equipo.colores}}</li> <br><br>
+            <li>Colores: {{equipo.colores}}</li>
+            <button><a href="{% url 'EditarEquipo' equipo.nombre %}" style="color: black; text-decoration: none;">Editar</a></button>
+            <button><a href="{% url 'EliminarEquipo' equipo.nombre %}" style="color: black; text-decoration: none;">Eliminar</a></button> <br><br>
         {% endfor %}
     </ul>
 
@@ -30,10 +36,13 @@
     <h1>Jugador/es encontrado/s</h1>
     <ul style="list-style: none;">
         {% for jugador in buscar_jugador %}
+            <img src="{{jugador.imagen.url}}" alt="{{jugador.nombre}}" onerror="this.onerror=null;this.src='/media/No-Image-Placeholder.jpg';">
             <li>Nombre: {{jugador.nombre}}</li>
             <li>Apellido: {{jugador.apellido}}</li>
             <li>Pie favorito: {{jugador.pie_fav}}</li>
-            <li>Posición: {{jugador.posicion}}</li> <br><br>
+            <li>Posición: {{jugador.posicion}}</li> 
+            <button><a href="{% url 'EditarJugador' jugador.nombre %}" style="color: black; text-decoration: none;">Editar</a></button>
+            <button><a href="{% url 'EliminarJugador' jugador.nombre %}" style="color: black; text-decoration: none;">Eliminar</a></button><br><br>
         {% endfor %}
     </ul>
 

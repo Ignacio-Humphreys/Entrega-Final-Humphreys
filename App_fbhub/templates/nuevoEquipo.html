@@ -26,13 +26,13 @@
         {% if crear_equipo %}
             {{crear_equipo.as_table}}
         {% elif form %}
-            {{form.as_table}}
+            {{form.as_table}}         
         {% endif %}
 
        </table>
 
         <input type="submit" value="Enviar">
 
-    </form>
-
+    </form> <br>
+    <p style="display: flex; justify-content: center;">Tené en cuenta que la foto a subir se verá en 300x300px</p>
 {% endblock %}

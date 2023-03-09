@@ -27,6 +27,7 @@
     <button type="submit">Crear usuario</button>
     
 </form>
+<p>¿Ya tienes una cuenta? Inicia sesión ingresando <a href="{% url 'Login' %}">aqui</a></p>
 
 {% elif form %}
 <form action="" method="post" style="margin-left: 2%; list-style: none;" enctype="multipart/form-data">
@@ -40,6 +41,6 @@
 
 {% endif %}
 
-<p>¿Ya tienes una cuenta? Inicia sesión ingresando <a href="{% url 'Login' %}">aqui</a></p>
+
 
 {% endblock %}

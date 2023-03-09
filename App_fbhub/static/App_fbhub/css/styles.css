@@ -61,7 +61,7 @@
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
   --bs-body-color: #212529;
-  --bs-body-bg: #dfdfdf;
+  --bs-body-bg: #fff;
 }
 
 *,
@@ -111,6 +111,27 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
 h1, .h1 {
   font-size: calc(1.375rem + 1.5vw);
 }
+
+.equipos, .estadios, .jugadores{
+  list-style: none !important;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.equipos_ind, .estadios_ind, .jugadores_ind{
+  flex: 0 1 30%;
+  text-align: center;
+  padding-bottom: 2%;
+}
+
+.equipos_ind img, .estadios_ind img, .jugadores_ind img{
+  max-width: 300px;
+  min-width: 100px;
+  height: 300px;
+}
+
 @media (min-width: 1200px) {
   h1, .h1 {
     font-size: 2.5rem;
@@ -373,11 +394,7 @@ select:disabled {
 }
 
 button,
-[type=button],
-[type=reset],
-[type=submit] {
-  -webkit-appearance: button;
-}
+
 button:not(:disabled),
 [type=button]:not(:disabled),
 [type=reset]:not(:disabled),
@@ -432,10 +449,7 @@ legend + * {
   height: auto;
 }
 
-[type=search] {
-  outline-offset: -2px;
-  -webkit-appearance: textfield;
-}
+
 
 /* rtl:raw:
 [type="tel"],
@@ -2488,8 +2502,7 @@ textarea.form-control-lg {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  -webkit-print-color-adjust: exact;
-          color-adjust: exact;
+
 }
 .form-check-input[type=checkbox] {
   border-radius: 0.25em;

@@ -213,7 +213,10 @@ def buscarItem(request):
 
 #Logueo y registro  
 def user_login(request):
-    if request.method =="POST":
+    if request.user.is_authenticated == True:
+        return redirect("Inicio")
+    
+    elif request.method =="POST":
         log = AuthenticationForm(request, data = request.POST)
 
         if log.is_valid():
@@ -234,27 +237,14 @@ def user_login(request):
 def sign_up(request):
     if request.user.is_authenticated == True:
         return redirect("Inicio")
-    
-    elif request.method == "POST":
-        signForm = UserRegisterForm(request.POST, request.FILES)
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-
-        if User.objects.filter(username=username).exists():
-            messages.error(request, 'El nombre de usuario ya existe, por favor elija otro')
-
-        elif User.objects.filter(email=email).exists():
-            messages.error(request, 'Email ya utilizado en otra cuenta, por favor seleccione uno distinto')
-
-        elif signForm.is_valid():
-            signForm.cleaned_data["username"]
+    elif request.method == 'POST':
+        signForm = UserRegistrationForm(request.POST, request.FILES)
+        if signForm.is_valid():
             signForm.save()
-            return redirect("Login")
-        
+            return redirect('Login')
     else:
-        signForm = UserRegisterForm()
-
-    return render(request, "../templates/registro.html", {"signForm":signForm})
+        signForm = UserRegistrationForm()
+    return render(request, '../templates/registro.html', {'signForm': signForm})
 
 @login_required
 def user_update(request):
@@ -267,14 +257,13 @@ def user_update(request):
           usuario.first_name = datos["first_name"]
           usuario.last_name = datos["last_name"]
           usuario.email = datos["email"]
-          usuario.username = datos["username"] 
           usuario.password1 = datos["password1"]
           usuario.password2 = datos["password2"]
           usuario.save()
           return redirect("Inicio")
     
     else:
-        form = UserEditForm(initial={"first_name":usuario.first_name, "last_name":usuario.last_name, "email":usuario.email, "username":usuario.username})
+        form = UserEditForm(initial={"first_name":usuario.first_name, "last_name":usuario.last_name, "email":usuario.email})
     
 
     context = {"form":form, "usuario":usuario, "url":avatar[0].imagen.url}
