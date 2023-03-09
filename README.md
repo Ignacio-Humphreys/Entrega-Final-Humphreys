@@ -11,8 +11,5 @@
 - En la barra de navegación superior, se puede buscar cualquier elemento en la base de datos entrando en la opción "Buscar".
 - No se puede crear un usuario sin un avatar, pero si se pueden crear objetos sin imágenes. Estos últimos tendrán una imagen predeterminada.
 
-#Funcionalidades a sumar
-- Búsqueda por diferentes palabras claves, distintas al nombre
-
 #Detalles adicionales:
 - Con la opción "Repositorio" dentro de la barra lateral se tendrá fácil acceso al repositorio del proyecto.
