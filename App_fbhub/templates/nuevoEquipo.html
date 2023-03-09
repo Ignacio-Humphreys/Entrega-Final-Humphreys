@@ -17,7 +17,7 @@
     {% endif %}
 
     {% if crear_equipo %}
-    <form style="display: flex; justify-content: center;" action="../nuevoequipo/" method="POST" enctype="multipart/form-data">{% csrf_token %}
+    <form style="display: flex; justify-content: center;" action="../nuevoEquipo/" method="POST" enctype="multipart/form-data">{% csrf_token %}
     {% elif form %}
     <form style="display: flex; justify-content: center;" action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
     {% endif %}

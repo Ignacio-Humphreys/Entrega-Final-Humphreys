@@ -4,8 +4,14 @@
 
 {% block changed_content %}
 
-<p>¿Estás seguro que querés eliminar al siguiente estadio?:<br> {{object}}</p>
-
+<p>¿Estás seguro que querés eliminar al siguiente estadio?:</p><br>
+<ul style="list-style: none;">
+    <img src="{{object.imagen.url}}" alt="Escudo {{object.nombre}}" onerror="this.onerror=null;this.src='/media/No-Image-Placeholder.jpg';">
+    <li>Nombre: {{object.nombre}}</li>
+    <li>Capacidad: {{object.capacidad}}</li>
+    <li>Ubicación: {{object.ubicacion}}</li>
+    <li>Equipo: {{object.equipo}}</li>
+</ul>
 
 <form method="POST" action="">{% csrf_token %}
 

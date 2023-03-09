@@ -4,8 +4,15 @@
 
 {% block changed_content %}
 
-<p>¿Estás seguro que querés eliminar al siguiente jugador?:<br> {{object}}</p>
-
+<p>¿Estás seguro que querés eliminar al siguiente jugador?:</p><br>
+<ul style="list-style: none;">
+    <img src="{{object.imagen.url}}" alt="Escudo {{object.nombre}}" onerror="this.onerror=null;this.src='/media/No-Image-Placeholder.jpg';">
+    <li>Nombre: {{object.nombre}}</li>
+    <li>Apellido: {{object.apellido}}</li>
+    <li>Pie hábil: {{object.pie_fav}}</li>
+    <li>Posición: {{object.posicion}}</li>
+    <li>Equipo actual: {{object.equipo_act}}</li>
+</ul>
 
 <form method="POST" action="">{% csrf_token %}
 

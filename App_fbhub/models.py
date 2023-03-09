@@ -15,7 +15,10 @@ class Equipo(models.Model):
 class Jugador(models.Model):
     nombre = models.CharField(max_length=40)
     apellido = models.CharField(max_length=40)
-    pie_fav = models.CharField(max_length=1)
+    opcion1 = "Izquierdo"
+    opcion2 = "Derecho"
+    opciones = [(opcion1, "Izquierdo"), (opcion2, "Derecho")]
+    pie_fav = models.CharField(max_length=9, choices=opciones, blank=False)
     posicion = models.CharField(max_length=20)
     equipo_act = models.CharField(max_length=40)
     imagen = models.ImageField(upload_to="media/", default="media/No-Image-Placeholder.jpg")

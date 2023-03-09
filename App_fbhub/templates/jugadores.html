@@ -16,7 +16,7 @@
         <li>Apellido: {{i.apellido}}</li>
         <li>Pie hábil: {{i.pie_fav}}</li>
         <li>Posición: {{i.posicion}}</li>
-        <li>Equipo actual: {{i.equipo_act}}</li>
+        <li>Equipo actual: <a href="../buscarItem/?nombre={{i.equipo_act}}">{{i.equipo_act}}</a></li>
         <button><a href="{% url 'EditarJugador' i.nombre %}" style="color: black; text-decoration: none;">Editar</a></button>
         <button><a href="{% url 'EliminarJugador' i.nombre %}" style="color: black; text-decoration: none;">Eliminar</a></button>
     </div>

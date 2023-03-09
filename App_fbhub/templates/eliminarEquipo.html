@@ -4,13 +4,20 @@
 
 {% block changed_content %}
 
-<p>¿Estás seguro que querés eliminar al siguiente equipo?:<br> {{object}}</p>
+<p style="text-align: center;">¿Estás seguro que querés eliminar al siguiente equipo?:</p><br>
+<ul style="list-style: none; text-align: center;">
+    <img src="{{object.escudo.url}}" alt="Escudo {{object.nombre}}" onerror="this.onerror=null;this.src='/media/No-Image-Placeholder.jpg';">
+    <li>Nombre: {{object.nombre}}</li>
+    <li>Cantidad de jugadores: {{object.cant_jugadores}}</li>
+    <li>Fundación: {{object.fundacion}}</li>
+    <li>Estadio: {{object.estadio}}</li>
+    <li>Colores: {{object.colores}}</li>
+</ul>
 
+<form method="POST" action="" style="display: flex; justify-content: space-evenly;">{% csrf_token %}
 
-<form method="POST" action="">{% csrf_token %}
-
-    <button><a href="{% url 'Inicio' %}" style="color: black; text-decoration: none;">Cancelar</a></button>
-    <input type="submit" name="Confirmar">
+    <button style="position: relative; top: 15px; left: 0; right: 0; bottom: 0; margin: auto; border: none; padding: 15px; border-radius: 15px; box-shadow: 0 0 8px #d9d4e7; width: 200px; height: 65px; background-color: #d9d4e7;"><a href="{% url 'Inicio' %}" style="color: black; text-decoration: none;">Cancelar</a></button>
+    <input style="position: relative; top: 15px; left: 0; right: 0; bottom: 0; margin: auto; border: none; padding: 15px; border-radius: 15px; box-shadow: 0 0 8px #d9d4e7; width: 200px; height: 65px; background-color: #d9d4e7;" type="submit" name="Confirmar">
 </form>
 
 {% endblock %}

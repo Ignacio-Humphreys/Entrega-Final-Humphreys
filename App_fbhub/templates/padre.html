@@ -10,7 +10,7 @@
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href={% static "App_fbhub/css/styles.css" %} rel="stylesheet" />
+        <link href={% static "App_fbhub/css/styles.css" %} rel="stylesheet" />     
     </head>
     <body>
         <div class="d-flex" id="wrapper">
@@ -23,6 +23,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'Jugadores' %}">Jugadores</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'Estadios' %}">Estadios</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'About' %}">Sobre Mi</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="https://github.com/Ignacio-Humphreys/Tercera-Pre-Entrega-Humphreys" target="_blank">Repositorio</a>
                 </div>
             </div>
             <!-- Page content wrapper-->
@@ -35,7 +36,6 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                                 <li class="nav-item active"><a class="nav-link" href="{% url 'Buscar' %}">Buscar</a></li>
-                                <li class="nav-item"><a class="nav-link" href="https://github.com/Ignacio-Humphreys/Tercera-Pre-Entrega-Humphreys" target="_blank">Repositorio</a></li>
                                 {% if request.user.is_authenticated %}
                                 <li><img src="{{url}}" style="max-height: 40px; max-width: 40px;"></li>
                                 {% endif %}
@@ -52,9 +52,9 @@
                                         <a class="dropdown-item" href="{% url 'Avatar' %}">Editar avatar</a>
                                         <a class="dropdown-item" href="{% url 'Update' %}">Editar perfil</a>
                                         <a class="dropdown-item" href="{% url 'Logout' %}">Logout</a>
-                                        {% endif %}
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{% url 'Agregar' %}" style="background-color: lightgray;">Agregar ítem</a>
+                                        {% endif %}
                                     </div>
                                 </li>
                             </ul>

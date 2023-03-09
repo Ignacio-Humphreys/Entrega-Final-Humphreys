@@ -14,7 +14,7 @@
         <li>Nombre: {{i.nombre}}</li>
         <li>Capacidad: {{i.capacidad}}</li>
         <li>Ubicación: {{i.ubicacion}}</li>
-        <li>Equipo: {{i.equipo}}</li>
+        <li>Equipo: <a href="../buscarItem/?nombre={{i.equipo}}">{{i.equipo}}</a></li>
         <button><a href="{% url 'EditarEstadio' i.nombre %}" style="color: black; text-decoration: none;">Editar</a></button>
         <button><a href="{% url 'EliminarEstadio' i.nombre %}" style="color: black; text-decoration: none;">Eliminar</a></button>
     </div>

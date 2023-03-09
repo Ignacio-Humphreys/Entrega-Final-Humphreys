@@ -12,79 +12,111 @@ from django.contrib.auth.decorators import login_required
 
 #Renderizados básicos de páginas
 def inicio(request):
-    avatar = Avatar.objects.filter(user=request.user.id)
-    return render(request, "../templates/inicio.html", {"url":avatar[0].imagen.url})
+    if request.user.is_authenticated == True:
+        avatar = Avatar.objects.filter(user=request.user.id)
+        return render(request, "../templates/inicio.html", {"url":avatar[0].imagen.url})
+    else:
+        return render(request, "../templates/inicio.html")
+    
 
 def equipos(request):
-    avatar = Avatar.objects.filter(user=request.user.id)
-    equipos = Equipo.objects.all()
-    context = {"equipos":equipos, "url":avatar[0].imagen.url}
-    return render(request, "../templates/equipos.html", context)
+    if request.user.is_authenticated == True:
+        avatar = Avatar.objects.filter(user=request.user.id)
+        equipos = Equipo.objects.all()
+        context = {"equipos":equipos, "url":avatar[0].imagen.url}
+        return render(request, "../templates/equipos.html", context)
+    else:
+        equipos = Equipo.objects.all()
+        return render(request, "../templates/equipos.html", {"equipos":equipos})
 
 def estadios(request):
-    avatar = Avatar.objects.filter(user=request.user.id)
-    estadios = Estadio.objects.all()
-    context = {"estadios":estadios, "url":avatar[0].imagen.url}
-    return render(request, "../templates/estadios.html", context)
+    if request.user.is_authenticated == True:
+        avatar = Avatar.objects.filter(user=request.user.id)
+        estadios = Estadio.objects.all()
+        context = {"estadios":estadios, "url":avatar[0].imagen.url}
+        return render(request, "../templates/estadios.html", context)
+    else:
+        estadios = Estadio.objects.all()
+        return render(request, "../templates/estadios.html", {"estadios":estadios})
 
 def jugadores(request):
-    avatar = Avatar.objects.filter(user=request.user.id)
-    jugadores = Jugador.objects.all()
-    context = {"jugadores":jugadores, "url":avatar[0].imagen.url}
-    return render(request, "../templates/jugadores.html", context)
+    if request.user.is_authenticated == True:
+        avatar = Avatar.objects.filter(user=request.user.id)
+        jugadores = Jugador.objects.all()
+        context = {"jugadores":jugadores, "url":avatar[0].imagen.url}
+        return render(request, "../templates/jugadores.html", context)
+    else:
+        jugadores = Jugador.objects.all()
+        return render(request, "../templates/jugadores.html", {"jugadores":jugadores})
 
 def about(request):
-    avatar = Avatar.objects.filter(user=request.user.id)
-    return render(request, "../templates/sobre_mi.html", {"url":avatar[0].imagen.url})
+    if request.user.is_authenticated == True:
+        avatar = Avatar.objects.filter(user=request.user.id)
+        return render(request, "../templates/sobre_mi.html", {"url":avatar[0].imagen.url})
+    else:
+        return render(request, "../templates/sobre_mi.html")
 
 def dummyPage(request):
     return render(request, "../templates/dummy.html")
 
 def agregarItem(request):
-    avatar = Avatar.objects.filter(user=request.user.id)
-    return render(request, "../templates/agregar.html", {"url":avatar[0].imagen.url})
+    if request.user.is_authenticated == True:
+        avatar = Avatar.objects.filter(user=request.user.id)
+        return render(request, "../templates/agregar.html", {"url":avatar[0].imagen.url})
+    else:
+        return redirect("Login")
 
 def buscar(request):
-    avatar = Avatar.objects.filter(user=request.user.id)
-    return render(request, "../templates/buscar.html", {"url":avatar[0].imagen.url})
-
+    if request.user.is_authenticated == True:
+        avatar = Avatar.objects.filter(user=request.user.id)
+        return render(request, "../templates/buscar.html", {"url":avatar[0].imagen.url})
+    else:
+        return render(request, "../templates/buscar.html")
 
 #Formularios de creación, edición y remoción de objetos
 @login_required
 def nuevoJugador(request):
-    avatar = Avatar.objects.filter(user=request.user.id)
-    if request.method == "POST":
-        crear_jugador = FormularioJugador(request.POST, request.FILES)
-        print(crear_jugador)
-
-        if crear_jugador.is_valid():
-            data = crear_jugador.cleaned_data
-            jugador = Jugador(nombre=data["nombre"], apellido=data["apellido"], pie_fav=data["pie_fav"], posicion=data["posicion"], imagen=data["imagen"])
-            jugador.save()
-            return redirect("../Jugadores")
-        
+    if request.user.is_authenticated == False:
+        return redirect("Login")
     else:
-        crear_jugador = FormularioJugador()
+        avatar = Avatar.objects.filter(user=request.user.id)
+        if request.method == "POST":
+            crear_jugador = FormularioJugador(request.POST, request.FILES)
+            print(crear_jugador)
 
-    return render(request, "../templates/nuevoJugador.html", {"crear_jugador":crear_jugador, "url":avatar[0].imagen.url})
+            if crear_jugador.is_valid():
+                data = crear_jugador.cleaned_data
+                jugador = Jugador(nombre=data["nombre"], apellido=data["apellido"], pie_fav=data["pie_fav"], posicion=data["posicion"], imagen=data["imagen"])
+                jugador.save()
+                return redirect("../Jugadores")
+            
+        else:
+            crear_jugador = FormularioJugador()
+
+        return render(request, "../templates/nuevoJugador.html", {"crear_jugador":crear_jugador, "url":avatar[0].imagen.url})
 
 @login_required
 def editarJugador(request, pk):
-    avatar = Avatar.objects.filter(user=request.user.id)
-    jugador = Jugador.objects.get(nombre=pk)
-    form = FormularioJugador(instance=jugador)
+    if request.user.is_authenticated == False:
+        return redirect("Login")
+    else:
+        avatar = Avatar.objects.filter(user=request.user.id)
+        jugador = Jugador.objects.get(nombre=pk)
+        form = FormularioJugador(instance=jugador)
 
-    if request.method == "POST":
-        form = FormularioJugador(request.POST, request.FILES, instance=jugador)
-        if form.is_valid():
-            form.save()
-            return redirect("../Jugadores")
-    
-    context = {"form":form, "url":avatar[0].imagen.url}
-    return render(request, "../templates/nuevoJugador.html", context)
+        if request.method == "POST":
+            form = FormularioJugador(request.POST, request.FILES, instance=jugador)
+            if form.is_valid():
+                form.save()
+                return redirect("../Jugadores")
+        
+        context = {"form":form, "url":avatar[0].imagen.url}
+        return render(request, "../templates/nuevoJugador.html", context)
 
 @login_required
 def eliminarJugador(request, pk):
+    if request.user.is_authenticated == False:
+        return redirect("Login")
     avatar = Avatar.objects.filter(user=request.user.id)
     jugador = Jugador.objects.get(nombre=pk)
     if request.method == "POST":
@@ -95,24 +127,31 @@ def eliminarJugador(request, pk):
 
 @login_required
 def nuevoEquipo(request):
-    avatar = Avatar.objects.filter(user=request.user.id)
-    if request.method == "POST":
-        crear_equipo = FormularioEquipos(request.POST, request.FILES)
-        print(crear_equipo)
+    if request.user.is_authenticated == False:
+        return redirect("Login")
 
-        if crear_equipo.is_valid():
-            data = crear_equipo.cleaned_data
-            equipo = Equipo(nombre=data["nombre"], cant_jugadores=data["cant_jugadores"], fundacion=data["fundacion"], estadio=data["estadio"], colores=data["colores"], escudo=data["escudo"])
-            equipo.save()
-            return redirect("../Equipos")
-        
     else:
-        crear_equipo = FormularioEquipos()
+        avatar = Avatar.objects.filter(user=request.user.id)
+        if request.method == "POST":
+            crear_equipo = FormularioEquipos(request.POST, request.FILES)
+            print(crear_equipo)
 
-    return render(request, "../templates/nuevoEquipo.html", {"crear_equipo":crear_equipo, "url":avatar[0].imagen.url})
+            if crear_equipo.is_valid():
+                data = crear_equipo.cleaned_data
+                equipo = Equipo(nombre=data["nombre"], cant_jugadores=data["cant_jugadores"], fundacion=data["fundacion"], estadio=data["estadio"], colores=data["colores"], escudo=data["escudo"])
+                equipo.save()
+                return redirect("../Equipos")
+            
+        else:
+            crear_equipo = FormularioEquipos()
+
+        return render(request, "../templates/nuevoEquipo.html", {"crear_equipo":crear_equipo, "url":avatar[0].imagen.url})
 
 @login_required
 def editarEquipo(request, pk):
+    if request.user.is_authenticated == False:
+        redirect("Login")
+
     avatar = Avatar.objects.filter(user=request.user.id)
     equipo = Equipo.objects.get(nombre=pk)
     form = FormularioEquipos(instance=equipo)
@@ -128,6 +167,9 @@ def editarEquipo(request, pk):
 
 @login_required
 def eliminarEquipo(request, pk):
+    if request.user.is_authenticated == False:
+        redirect("Login")
+
     avatar = Avatar.objects.filter(user=request.user.id)
     equipo = Equipo.objects.get(nombre=pk)
     if request.method == "POST":
@@ -138,6 +180,9 @@ def eliminarEquipo(request, pk):
 
 @login_required
 def nuevoEstadio(request):
+    if request.user.is_authenticated == False:
+        redirect("Login")
+
     avatar = Avatar.objects.filter(user=request.user.id)
     if request.method == "POST":
         crear_estadio = FormularioEstadio(request.POST, request.FILES)
@@ -156,6 +201,9 @@ def nuevoEstadio(request):
 
 @login_required
 def editarEstadio(request, pk):
+    if request.user.is_authenticated == False:
+        redirect("Login")
+
     avatar = Avatar.objects.filter(user=request.user.id)
     estadio = Estadio.objects.get(nombre=pk)
     form = FormularioEstadio(instance=estadio)
@@ -171,6 +219,9 @@ def editarEstadio(request, pk):
 
 @login_required
 def eliminarEstadio(request, pk):
+    if request.user.is_authenticated == False:
+        redirect("Login")
+
     avatar = Avatar.objects.filter(user=request.user.id)
     estadio = Estadio.objects.get(nombre=pk)
     if request.method == "POST":
@@ -205,9 +256,9 @@ def buscarItem(request):
             return render(request, "../templates/busquedaFinalizada.html", {"buscar_equipo":buscar_equipo, "nombre":termino, "url":avatar[0].imagen.url})
         elif buscar_jugador:
             return render(request, "../templates/busquedaFinalizada.html", {"buscar_jugador":buscar_jugador, "nombre":termino, "url":avatar[0].imagen.url})
-    else:
-        falla = "No se enviaron los datos correctamente"
-        return HttpResponse(falla)
+        else:
+            falla = "No se enviaron los datos correctamente"
+            return HttpResponse(render(request, "../templates/busquedaFinalizada.html", {"falla":falla}))
 
 
 
