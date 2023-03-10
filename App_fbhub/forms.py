@@ -82,3 +82,6 @@ class UserRegistrationForm(forms.ModelForm):
                 avatar = Avatar(user=user, imagen=imagen)
                 avatar.save()
         return user
+    
+class FormularioComentarios(forms.Form):
+    text = forms.CharField(widget=forms.Textarea(), label="Ingresa tu comentario")

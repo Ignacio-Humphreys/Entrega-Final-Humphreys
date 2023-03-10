@@ -339,4 +339,37 @@ def agregarAvatar(request):
         context = {"avatarForm":avatarForm, "url":avatar[0].imagen.url}
         return render(request, "../templates/avatar.html", context)
 
+@login_required
+def agregar_comentario(request, model, id):
+    avatar = Avatar.objects.filter(user=request.user.id)
+    if request.method == "POST":
+        form = FormularioComentarios(request.POST)
+        if form.is_valid():
+            texto = form.cleaned_data["text"]
+            user = request.user if request.user.is_authenticated else None
+            if model == "equipo":
+                equipo = Equipo.objects.get(id=id)
+                Comentario.objects.create(user=user, texto=texto, equipo=equipo)
+            elif model == "jugador":
+                jugador = Jugador.objects.get(id=id)
+                Comentario.objects.create(user=user, texto=texto, jugador=jugador)
+            elif model == "estadio":
+                estadio = Estadio.objects.get(id=id)
+                Comentario.objects.create(user=user, texto=texto, estadio=estadio)
+            else:
+                return redirect("AgregarComentario", model=model, id=id)
+            return redirect("AgregarComentario", model=model, id=id)
+    else:
+        form = FormularioComentarios()
 
+    comentarios = Comentario.objects.filter(**{f"{model}__id": id}).order_by("-fecha")
+
+    contenido = get_object_or_404({"equipo": Equipo, "jugador": Jugador, "estadio": Estadio}.get(model),id=id)
+
+    return render(request,"comentarios.html",{"form": form, "comentarios": comentarios, "object": contenido, "url":avatar[0].imagen.url})
+
+def eliminarComentario(request, pk):
+    comentario = get_object_or_404(Comentario, pk=pk)
+    if request.user == comentario.user:
+        comentario.delete()
+    return redirect(request.META.get('HTTP_REFERER'))

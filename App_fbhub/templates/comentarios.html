@@ -1,0 +1,46 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block changed_content  %}
+
+
+{% if object.apellido != "" %}
+<h1 style="display: flex; justify-content: center;">Comentarios sobre {{object.nombre}} {{object.apellido}}</h1>
+{% else %}
+<h1 style="display: flex; justify-content: center;">Comentarios sobre {{object.nombre}}</h1>
+{% endif %}
+
+
+
+{% if comentarios %}
+{% for comentario in comentarios %}
+
+    <ul class="comentarios">
+        <li class="usuario_comentarios">{{ comentario.user.username }} a las {{ comentario.fecha|date:"SHORT_DATETIME_FORMAT" }}:
+        {% if user.is_authenticated and user == comentario.user %}
+            <form method="post" action="{% url 'EliminarComentario' comentario.id %}" style="display:inline; padding-left: 1%;">
+                {% csrf_token %}
+                <button type="submit" class="boton_eliminar">Eliminar</button>
+            </form>
+        {% endif %}
+        </li>
+        <li class="comentario_comentarios">{{ comentario.texto }}</li>
+    </ul>
+
+{% endfor %}
+
+
+{% else %}
+
+<p style="display: flex; justify-content: center;">Todavía no hay comentarios publicados.</p>
+{% endif %}
+
+<h2 style="display: flex; justify-content: center;">Añade un comentario</h2>
+<form method="post" class="nuevo_coment">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="boton_regular">Post</button>
+</form>
+
+{% endblock %}

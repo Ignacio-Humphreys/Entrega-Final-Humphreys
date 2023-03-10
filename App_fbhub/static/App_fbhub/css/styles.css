@@ -153,6 +153,45 @@ h1, .h1 {
   background-color: #d9d4e7
 }
 
+.comentarios{
+  list-style: none;
+  background-color: lightgray;
+  border-radius: 10%;
+}
+.usuario_comentarios{
+  font-style: italic;
+  font-weight: 500;
+  display: flex;
+  justify-content: flex-start;
+}
+.comentario_comentarios{
+  display: flex;
+  justify-content: center;
+}
+.nuevo_coment label{
+  font-style: oblique;
+  display: flex;
+  justify-content: center;
+}
+.nuevo_coment p{
+  display: flex;
+  flex-direction: column;
+  background: beige;
+}
+.nuevo_coment button{
+  display: flex;
+  justify-content: center;
+  
+}
+
+.boton_eliminar{
+  border-radius: 60%;
+  border: none;
+  background: inherit;
+  color: red;
+  font-style: oblique;
+  font-weight: 600;
+}
 @media (min-width: 1200px) {
   h1, .h1 {
     font-size: 2.5rem;

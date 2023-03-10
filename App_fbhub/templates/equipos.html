@@ -15,6 +15,7 @@
         <li>Fundación: {{i.fundacion}}</li>
         <li>Estadio: <a href="../buscarItem/?nombre={{i.estadio}}">{{i.estadio}}</a></li>
         <li>Colores: {{i.colores}}</li>
+        <li><a href="{% url 'AgregarComentario' 'equipo' i.id %}">Comentarios</a></li>
         <button class="boton_regular"><a href="{% url 'EditarEquipo' i.nombre %}" style="color: black; text-decoration: none;">Editar</a></button>
         <button class="boton_regular"><a href="{% url 'EliminarEquipo' i.nombre %}" style="color: black; text-decoration: none;">Eliminar</a></button>
     </div>

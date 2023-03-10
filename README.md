@@ -1,7 +1,7 @@
 #Football Hub:
 - Permite ver equipos, estadios y jugadores en la BD.
 - Permite crear nuevos objetos en cada uno de los items mencionados.
-- Además, permite editar objetos ya existentes y también eliminarlos de la base de datos
+- Además, permite editar objetos ya existentes y también eliminarlos de la base de datos, además de dejar comentarios dentro de cada uno.
 - Cada usuario puede modificar su avatar, contraseña y datos personales una vez logueado.
 
 #Navegación:

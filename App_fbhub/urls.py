@@ -19,6 +19,8 @@ urlpatterns = [
     path("eliminarEquipo/<str:pk>", views.eliminarEquipo, name="EliminarEquipo"),
     path("eliminarEstadio/<str:pk>", views.eliminarEstadio, name="EliminarEstadio"),
     path("eliminarJugador/<str:pk>", views.eliminarJugador, name="EliminarJugador"),
+    path("comentarios/<str:model>/<str:id>", views.agregar_comentario, name="AgregarComentario"),
+    path('eliminar_comentario/<int:pk>/', views.eliminarComentario, name='EliminarComentario'),
     path("Buscar/", views.buscar, name="Buscar"), #Página buscar
     path("buscarItem/", views.buscarItem), #Método de búsqueda en views
     path("buscarEquipo/", views.buscarEquipo, name="BuscarEquipo"),

@@ -39,3 +39,11 @@ class Avatar(models.Model):
     imagen = models.ImageField(upload_to="avatares/", null=True, blank=True)
     def __str__(self):
         return f"{self.user} - {self.imagen}"
+
+class Comentario(models.Model):
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE) 
+    texto = models.TextField()
+    fecha = models.DateTimeField(auto_now_add=True)
+    equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE, null=True, blank=True, related_name='comentarios')
+    jugador = models.ForeignKey(Jugador, on_delete=models.CASCADE, null=True, blank=True, related_name='comentarios')
+    estadio = models.ForeignKey(Estadio, on_delete=models.CASCADE, null=True, blank=True, related_name='comentarios')
