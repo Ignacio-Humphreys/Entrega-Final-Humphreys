@@ -13,3 +13,6 @@
 
 #Detalles adicionales:
 - Con la opción "Repositorio" dentro de la barra lateral se tendrá fácil acceso al repositorio del proyecto.
+
+#Video de funcionamiento:
+- https://youtu.be/bt2v7AEH1m0

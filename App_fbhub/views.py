@@ -230,34 +230,40 @@ def eliminarEstadio(request, pk):
     return render(request, "../templates/eliminarEstadio.html", context)
 
 #Búsqueda en la base de datos
+@login_required
 def buscarEquipo(request):
     avatar = Avatar.objects.filter(user=request.user.id)
     return render(request, "../templates/buscarEquipo.html", {"url":avatar[0].imagen.url})
 
+@login_required
 def buscarJugador(request):
     avatar = Avatar.objects.filter(user=request.user.id)
     return render(request, "../templates/buscarJugador.html", {"url":avatar[0].imagen.url})
 
+@login_required
 def buscarEstadio(request):
    avatar = Avatar.objects.filter(user=request.user.id)
    return render(request, "../templates/buscarEstadio.html", {"url":avatar[0].imagen.url})
 
 def buscarItem(request):
-    avatar = Avatar.objects.filter(user=request.user.id)
-    if request.GET["nombre"]:
-        termino = request.GET["nombre"]
-        buscar_estadio = Estadio.objects.filter(nombre__icontains=termino)
-        buscar_equipo = Equipo.objects.filter(nombre__icontains=termino)
-        buscar_jugador = Jugador.objects.filter(nombre__icontains=termino)
-        if buscar_estadio:
-            return render(request, "../templates/busquedaFinalizada.html", {"buscar_estadio":buscar_estadio, "nombre":termino, "url":avatar[0].imagen.url})
-        elif buscar_equipo:
-            return render(request, "../templates/busquedaFinalizada.html", {"buscar_equipo":buscar_equipo, "nombre":termino, "url":avatar[0].imagen.url})
-        elif buscar_jugador:
-            return render(request, "../templates/busquedaFinalizada.html", {"buscar_jugador":buscar_jugador, "nombre":termino, "url":avatar[0].imagen.url})
-        else:
-            falla = "No se enviaron los datos correctamente"
-            return HttpResponse(render(request, "../templates/busquedaFinalizada.html", {"falla":falla}))
+    if request.user.is_authenticated == False:
+        return redirect("Login")
+    else:
+        avatar = Avatar.objects.filter(user=request.user.id)
+        if request.GET["nombre"]:
+            termino = request.GET["nombre"]
+            buscar_estadio = Estadio.objects.filter(nombre__icontains=termino)
+            buscar_equipo = Equipo.objects.filter(nombre__icontains=termino)
+            buscar_jugador = Jugador.objects.filter(nombre__icontains=termino)
+            if buscar_estadio:
+                return render(request, "../templates/busquedaFinalizada.html", {"buscar_estadio":buscar_estadio, "nombre":termino, "url":avatar[0].imagen.url})
+            elif buscar_equipo:
+                return render(request, "../templates/busquedaFinalizada.html", {"buscar_equipo":buscar_equipo, "nombre":termino, "url":avatar[0].imagen.url})
+            elif buscar_jugador:
+                return render(request, "../templates/busquedaFinalizada.html", {"buscar_jugador":buscar_jugador, "nombre":termino, "url":avatar[0].imagen.url})
+            else:
+                falla = "No se enviaron los datos correctamente"
+                return HttpResponse(render(request, "../templates/busquedaFinalizada.html", {"falla":falla}))
 
 
 
@@ -339,34 +345,36 @@ def agregarAvatar(request):
         context = {"avatarForm":avatarForm, "url":avatar[0].imagen.url}
         return render(request, "../templates/avatar.html", context)
 
-@login_required
 def agregar_comentario(request, model, id):
-    avatar = Avatar.objects.filter(user=request.user.id)
-    if request.method == "POST":
-        form = FormularioComentarios(request.POST)
-        if form.is_valid():
-            texto = form.cleaned_data["text"]
-            user = request.user if request.user.is_authenticated else None
-            if model == "equipo":
-                equipo = Equipo.objects.get(id=id)
-                Comentario.objects.create(user=user, texto=texto, equipo=equipo)
-            elif model == "jugador":
-                jugador = Jugador.objects.get(id=id)
-                Comentario.objects.create(user=user, texto=texto, jugador=jugador)
-            elif model == "estadio":
-                estadio = Estadio.objects.get(id=id)
-                Comentario.objects.create(user=user, texto=texto, estadio=estadio)
-            else:
+    if request.user.is_authenticated == True:
+        avatar = Avatar.objects.filter(user=request.user.id)
+        if request.method == "POST":
+            form = FormularioComentarios(request.POST)
+            if form.is_valid():
+                texto = form.cleaned_data["text"]
+                user = request.user if request.user.is_authenticated else None
+                if model == "equipo":
+                    equipo = Equipo.objects.get(id=id)
+                    Comentario.objects.create(user=user, texto=texto, equipo=equipo)
+                elif model == "jugador":
+                    jugador = Jugador.objects.get(id=id)
+                    Comentario.objects.create(user=user, texto=texto, jugador=jugador)
+                elif model == "estadio":
+                    estadio = Estadio.objects.get(id=id)
+                    Comentario.objects.create(user=user, texto=texto, estadio=estadio)
+                else:
+                    return redirect("AgregarComentario", model=model, id=id)
                 return redirect("AgregarComentario", model=model, id=id)
-            return redirect("AgregarComentario", model=model, id=id)
+        else:
+            form = FormularioComentarios()
+
+        comentarios = Comentario.objects.filter(**{f"{model}__id": id}).order_by("-fecha")
+
+        contenido = get_object_or_404({"equipo": Equipo, "jugador": Jugador, "estadio": Estadio}.get(model),id=id)
+
+        return render(request,"comentarios.html",{"form": form, "comentarios": comentarios, "object": contenido, "url":avatar[0].imagen.url})
     else:
-        form = FormularioComentarios()
-
-    comentarios = Comentario.objects.filter(**{f"{model}__id": id}).order_by("-fecha")
-
-    contenido = get_object_or_404({"equipo": Equipo, "jugador": Jugador, "estadio": Estadio}.get(model),id=id)
-
-    return render(request,"comentarios.html",{"form": form, "comentarios": comentarios, "object": contenido, "url":avatar[0].imagen.url})
+        return redirect("Login")
 
 def eliminarComentario(request, pk):
     comentario = get_object_or_404(Comentario, pk=pk)
